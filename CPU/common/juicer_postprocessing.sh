@@ -67,7 +67,7 @@ fi
 
 echo -e "${juicer_tools_path} is post-processing Hi-C for ${genomeID}\nData read from ${hic_file_path}.\nMotifs read from ${bed_file_dir}\n"
 echo -e "ARROWHEAD:\n"
-${juicer_tools_path} arrowhead ${hic_file_path} ${hic_file_path%.*}"_contact_domains.txt"
+${juicer_tools_path} arrowhead --ignore_sparsity ${hic_file_path} ${hic_file_path%.*}"_contact_domains.txt"
 if [ $? -ne 0 ]; then
     echo "***! Problem while running Arrowhead";
     exit 1
@@ -75,7 +75,7 @@ fi
 echo -e "\nHiCCUPS:\n"
 if hash nvcc 2>/dev/null 
 then 
-    ${juicer_tools_path} hiccups ${hic_file_path} ${hic_file_path%.*}"_loops.txt"
+    ${juicer_tools_path} hiccups --ignore_sparsity ${hic_file_path} ${hic_file_path%.*}"_loops.txt"
     if [ $? -ne 0 ]; then
 	echo "***! Problem while running HiCCUPS";
 	exit 1
